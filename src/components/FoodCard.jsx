@@ -3,7 +3,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 
 export default function FoodCard(props) {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.onPress(props.item.id)}>
             <View style={styles.card}>
                 <Image source={{ uri: props.item.imageUrl }} resizeMode="cover" style={styles.picture} />
                 <Text style={[styles.text, {marginVertical: 5}]}>{props.item.name}</Text>

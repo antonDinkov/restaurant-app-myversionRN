@@ -5,3 +5,5 @@ export const featuredItems = (array, idsArray) => {
 };
 
 export const getItemsByCategory = (categoryId, menuArray) => menuArray.filter((item) => item.categoryId === categoryId);
+
+export const getItemById = (id, menuArray) => menuArray.find((item) => item.id === id);

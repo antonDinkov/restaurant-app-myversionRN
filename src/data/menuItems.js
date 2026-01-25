@@ -188,8 +188,4 @@ export const menuItems = [
     },
 ];
 
-// Helper functions
-export const getItemById = (id) => menuItems.find((item) => item.id === id);
 
-export const getItemsByCategory = (categoryId) =>
-  menuItems.filter((item) => item.categoryId === categoryId);

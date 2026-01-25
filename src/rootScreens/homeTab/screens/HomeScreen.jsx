@@ -1,15 +1,20 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { menuItems } from "../../../data/menuItems";
 import FoodCard from "../../../components/FoodCard";
-import { featuredItems, getItemsByCategory } from "../../../utils/itemFilterFns";
+import { featuredItems, getItemById, getItemsByCategory } from "../../../utils/itemFilterFns";
 import { categories } from "../../../data/categoriesData";
 import CategoryCard from "../../../components/CategoryCard";
 
-export default function HomeScreen(props) {
+export default function HomeScreen({ navigation }) {
     const result = featuredItems(
         menuItems,
         ['item-1', 'item-5', 'item-9', 'item-16', 'item-19']
     );
+
+    const itemDetailsHandler = (itemId) => {
+        const item = getItemById(itemId, menuItems)
+        navigation.navigate('Details', { item })
+    }
 
     console.log('FEATURED RESULT:', result);
     return (
@@ -30,7 +35,7 @@ export default function HomeScreen(props) {
 
                         featuredItems(menuItems, ['item-1', 'item-5', 'item-9', 'item-16', 'item-19']).map(item =>
 
-                            <FoodCard key={item.id} item={item} />
+                            <FoodCard key={item.id} item={item} onPress={itemDetailsHandler} />
                         )
                     }
                 </ScrollView>
