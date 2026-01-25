@@ -1,0 +1,25 @@
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+export default function CategoryCard(props) {
+    return (
+        <TouchableOpacity>
+            <View style={styles.card}>
+                <Text style={styles.text}>{props.category.title}</Text>
+                <Text>{props.counts} items</Text>
+            </View>
+        </TouchableOpacity>
+
+    )
+}
+
+const styles = StyleSheet.create({
+    card: {
+        height: 50,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        padding: 15
+    },
+    text: {
+        fontWeight: 600,
+    }
+})

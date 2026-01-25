@@ -1,7 +1,9 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { menuItems } from "../../../data/menuItems";
 import FoodCard from "../../../components/FoodCard";
-import { featuredItems } from "../../../utils/itemFilterFns";
+import { featuredItems, getItemsByCategory } from "../../../utils/itemFilterFns";
+import { categories } from "../../../data/categoriesData";
+import CategoryCard from "../../../components/CategoryCard";
 
 export default function HomeScreen(props) {
     const result = featuredItems(
@@ -33,11 +35,11 @@ export default function HomeScreen(props) {
                     }
                 </ScrollView>
             </View>
-            <View>
-                <Text>Categories Main Section Fragment</Text>
-                <View>
-                    <Text>Category card Placehoder</Text>
-                </View>
+            <View style={[styles.section,{gap: 10}]}>
+                <Text style={styles.sectionTitle}>Categories</Text>
+                {categories.map(category =>
+                    <CategoryCard key={category.id} category={category} counts={getItemsByCategory(category.id, menuItems).length} />
+                )}
             </View>
         </ScrollView>
 
