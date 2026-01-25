@@ -188,11 +188,6 @@ export const menuItems = [
     },
 ];
 
-// Featured items (selection of popular items)
-export const featuredItems = menuItems.filter((item) =>
-  ['item-1', 'item-5', 'item-9', 'item-16', 'item-19'].includes(item.id)
-);
-
 // Helper functions
 export const getItemById = (id) => menuItems.find((item) => item.id === id);
 

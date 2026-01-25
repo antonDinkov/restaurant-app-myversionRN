@@ -1,21 +1,36 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { menuItems } from "../../../data/menuItems";
+import FoodCard from "../../../components/FoodCard";
+import { featuredItems } from "../../../utils/itemFilterFns";
 
 export default function HomeScreen(props) {
+    const result = featuredItems(
+        menuItems,
+        ['item-1', 'item-5', 'item-9', 'item-16', 'item-19']
+    );
+
+    console.log('FEATURED RESULT:', result);
     return (
         <ScrollView>
-            <View style={Styles.header}>
-                <Text style={[Styles.headerText, {fontWeight: 'bold', fontSize: 28}]}>Tasty Bites</Text>
-                <View style={Styles.headerView}>
-                    <Text style={[Styles.headerText]}>⭐ 4.8 Rating</Text>
-                    <Text style={[Styles.headerText]}>•</Text>
-                    <Text style={[Styles.headerText]}>🕐 25-35 min</Text>
+            <View style={styles.header}>
+                <Text style={[styles.headerText, { fontWeight: 'bold', fontSize: 28 }]}>Tasty Bites</Text>
+                <View style={styles.headerView}>
+                    <Text style={[styles.headerText]}>⭐ 4.8 Rating</Text>
+                    <Text style={[styles.headerText]}>•</Text>
+                    <Text style={[styles.headerText]}>🕐 25-35 min</Text>
                 </View>
-                <Text style={[Styles.headerText]}>Fresh & Delicious Food Delivery Fast</Text>
+                <Text style={[styles.headerText]}>Fresh & Delicious Food Delivery Fast</Text>
             </View>
-            <View>
-                <Text>Featurd Items Main Section Fragment</Text>
-                <ScrollView>
-                    <Text>Item Card Placeholder</Text>
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Featurd Items</Text>
+                <ScrollView horizontal contentContainerStyle={{ gap: 15 }}>
+                    {
+
+                        featuredItems(menuItems, ['item-1', 'item-5', 'item-9', 'item-16', 'item-19']).map(item =>
+
+                            <FoodCard key={item.id} item={item} />
+                        )
+                    }
                 </ScrollView>
             </View>
             <View>
@@ -29,7 +44,7 @@ export default function HomeScreen(props) {
     )
 }
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
     header: {
         backgroundColor: '#437afb',
         borderBottomEndRadius: 20,
@@ -43,6 +58,18 @@ const Styles = StyleSheet.create({
     },
     headerText: {
         color: 'white',
+    },
+    section: {
+        padding: 20
+    },
+    sectionTitle: {
+        fontSize: 20,
+        fontWeight: '700',
+        color: '#333',
+        marginBottom: 12,
+    },
+    scroll: {
+        gap: 10
     }
 
 })
