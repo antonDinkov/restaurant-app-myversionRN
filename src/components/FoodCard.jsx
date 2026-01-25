@@ -6,7 +6,7 @@ export default function FoodCard(props) {
         <TouchableOpacity>
             <View style={styles.card}>
                 <Image source={{ uri: props.item.imageUrl }} resizeMode="cover" style={styles.picture} />
-                <Text style={styles.text}>{props.item.name}</Text>
+                <Text style={[styles.text, {marginVertical: 5}]}>{props.item.name}</Text>
                 <Text style={[styles.text, {color: "#437afb", fontWeight: 'bold'}]}>{props.item.price}</Text>
             </View>
         </TouchableOpacity>
@@ -18,7 +18,10 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         backgroundColor: 'white',
-        justifyContent: 'space-around'
+        /* justifyContent: 'space-around', */
+        borderRadius: 15,
+        marginBottom: 10,
+        overflow: 'hidden'
     },
     picture: {
         width: '100%',
