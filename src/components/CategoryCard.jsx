@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function CategoryCard(props) {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.onPress(props.category.id)}>
             <View style={styles.card}>
                 <Text style={styles.text}>{props.category.title}</Text>
                 <Text>{props.counts} items</Text>

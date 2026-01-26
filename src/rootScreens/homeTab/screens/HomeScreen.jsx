@@ -16,6 +16,11 @@ export default function HomeScreen({ navigation }) {
         navigation.navigate('Details', { item })
     }
 
+    const categoriesDetailsHandler = (catId) => {
+        const items = getItemsByCategory(catId, menuItems);
+        navigation.navigate('Category', {items, itemDetailsHandler})
+    }
+
     return (
         <ScrollView>
             <View style={styles.header}>
@@ -42,7 +47,7 @@ export default function HomeScreen({ navigation }) {
             <View style={[styles.section,{gap: 10}]}>
                 <Text style={styles.sectionTitle}>Categories</Text>
                 {categories.map(category =>
-                    <CategoryCard key={category.id} category={category} counts={getItemsByCategory(category.id, menuItems).length} />
+                    <CategoryCard key={category.id} category={category} counts={getItemsByCategory(category.id, menuItems).length} onPress={categoriesDetailsHandler} />
                 )}
             </View>
         </ScrollView>
