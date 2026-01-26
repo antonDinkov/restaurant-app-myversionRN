@@ -16,7 +16,6 @@ export default function HomeScreen({ navigation }) {
         navigation.navigate('Details', { item })
     }
 
-    console.log('FEATURED RESULT:', result);
     return (
         <ScrollView>
             <View style={styles.header}>
