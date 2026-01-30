@@ -6,10 +6,7 @@ import { categories } from "../../../data/categoriesData";
 import CategoryCard from "../../../components/CategoryCard";
 
 export default function HomeScreen({ navigation }) {
-    const result = featuredItems(
-        menuItems,
-        ['item-1', 'item-5', 'item-9', 'item-16', 'item-19']
-    );
+    const futured = featuredItems(menuItems, ['item-1', 'item-5', 'item-9', 'item-16', 'item-19']);
 
     const itemDetailsHandler = (itemId) => {
         const item = getItemById(itemId, menuItems)
@@ -37,7 +34,7 @@ export default function HomeScreen({ navigation }) {
                 <ScrollView horizontal contentContainerStyle={{ gap: 15 }}>
                     {
 
-                        featuredItems(menuItems, ['item-1', 'item-5', 'item-9', 'item-16', 'item-19']).map(item =>
+                        futured.map(item =>
 
                             <FoodCard key={item.id} item={item} onPress={itemDetailsHandler} />
                         )
