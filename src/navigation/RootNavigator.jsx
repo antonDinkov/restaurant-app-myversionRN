@@ -8,9 +8,9 @@ export default function RootNavigator(props) {
     const Tabs = createBottomTabNavigator();
     return (
         <Tabs.Navigator>
-            <Tabs.Screen name="Home" component={HomeNavigator} options={{headerShown: false, tabBarIcon: ({focused, color, size}) => <Ionicons name="home" size={size} color={color} />}} />
-            <Tabs.Screen name="Cart" component={CartNavigator} options={{headerShown: false, tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color} />}} />
-            <Tabs.Screen name="Info" component={InfoNavigator} options={{headerShown: false, tabBarIcon: ({ color, size }) => <Ionicons name="information-circle" size={size} color={color} />}} />
+            <Tabs.Screen name="HomeNav" component={HomeNavigator} options={{headerShown: false, tabBarIcon: ({focused, color, size}) => <Ionicons name="home" size={size} color={color} />}} />
+            <Tabs.Screen name="CartNav" component={CartNavigator} options={{headerShown: false, tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color} />}} />
+            <Tabs.Screen name="InfoNav" component={InfoNavigator} options={{headerShown: false, tabBarIcon: ({ color, size }) => <Ionicons name="information-circle" size={size} color={color} />}} />
         </Tabs.Navigator>
     )
 }
