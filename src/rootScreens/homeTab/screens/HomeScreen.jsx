@@ -4,9 +4,24 @@ import FoodCard from "../../../components/FoodCard";
 import { featuredItems, getItemById, getItemsByCategory } from "../../../utils/itemFilterFns";
 import { categories } from "../../../data/categoriesData";
 import CategoryCard from "../../../components/CategoryCard";
+import { useEffect, useState } from "react";
+import { itemApi } from "../../../api";
 
 export default function HomeScreen({ navigation }) {
-    const futured = featuredItems(menuItems, ['item-1', 'item-5', 'item-9', 'item-16', 'item-19']);
+    const [feutured, setFeatured] = useState([]);
+
+    useEffect(() => {
+        console.log('FETCHING FEATURED...');
+        async function fetchData() {
+            try {
+                const featuredItems = await itemApi.getFeatured();
+                setFeatured(featuredItems.data);
+            } catch (error) {
+                alert('Cannot Load Data')
+            }
+        }
+        fetchData();
+    }, []);
 
     const itemDetailsHandler = (itemId) => {
         const item = getItemById(itemId, menuItems)
@@ -34,7 +49,7 @@ export default function HomeScreen({ navigation }) {
                 <ScrollView horizontal contentContainerStyle={{ gap: 15 }}>
                     {
 
-                        futured.map(item =>
+                        feutured.map(item =>
 
                             <FoodCard key={item.id} item={item} onPress={itemDetailsHandler} />
                         )
