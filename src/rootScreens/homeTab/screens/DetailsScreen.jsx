@@ -1,7 +1,12 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import Button from "../../../components/Button";
+import QuantityStepper from "../../../components/QuantityStepper";
+import { useState } from "react";
 
 export default function DetailsScreen({ route, navigation }) {
+    const [quontity, setQuontity] = useState(1)
+
+
     const { item } = route.params;
     return (
         <View style={styles.container}>
@@ -23,14 +28,14 @@ export default function DetailsScreen({ route, navigation }) {
 
                     <View style={styles.qtySection}>
                         <Text style={styles.qtyLabel}>Quantity</Text>
-                        <Text> - 1 + </Text>
+                        <QuantityStepper qty={quontity} onIncrement={() => setQuontity(quontity + 1)} onDecrement={() => setQuontity(quontity - 1)} />
                     </View>
                 </View>
 
                 <View style={styles.footer}>
                     <View style={styles.priceContainer}>
                         <Text style={styles.totalLabel}>Total:</Text>
-                        <Text style={styles.totalPrice}>${item.price.toFixed(2)}</Text>
+                        <Text style={styles.totalPrice}>${((Number(item.price)*quontity).toFixed(2))}</Text>
                     </View>
                     <View style={styles.footerButtons}>
                         <Button
