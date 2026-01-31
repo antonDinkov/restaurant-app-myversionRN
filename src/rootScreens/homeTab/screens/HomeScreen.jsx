@@ -1,21 +1,22 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { menuItems } from "../../../data/menuItems";
 import FoodCard from "../../../components/FoodCard";
-import { featuredItems, getItemById, getItemsByCategory } from "../../../utils/itemFilterFns";
-import { categories } from "../../../data/categoriesData";
+import { getItemById, getItemsByCategory } from "../../../utils/itemFilterFns";
 import CategoryCard from "../../../components/CategoryCard";
 import { useEffect, useState } from "react";
-import { itemApi } from "../../../api";
+import { categoryApi, itemApi } from "../../../api";
 
 export default function HomeScreen({ navigation }) {
-    const [feutured, setFeatured] = useState([]);
+    const [featured, setFeatured] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        console.log('FETCHING FEATURED...');
         async function fetchData() {
             try {
                 const featuredItems = await itemApi.getFeatured();
                 setFeatured(featuredItems.data);
+                const categoriesAll = await categoryApi.getAll();
+                setCategories(categoriesAll.data);
             } catch (error) {
                 alert('Cannot Load Data')
             }
@@ -49,7 +50,7 @@ export default function HomeScreen({ navigation }) {
                 <ScrollView horizontal contentContainerStyle={{ gap: 15 }}>
                     {
 
-                        feutured.map(item =>
+                        featured.map(item =>
 
                             <FoodCard key={item.id} item={item} onPress={itemDetailsHandler} />
                         )
