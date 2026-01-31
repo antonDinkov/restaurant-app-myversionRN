@@ -9,6 +9,7 @@ import { categoryApi, itemApi } from "../../../api";
 export default function HomeScreen({ navigation }) {
     const [featured, setFeatured] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [catNameCount, setCatNameCount] = useState({})
 
     useEffect(() => {
         async function fetchData() {
@@ -17,6 +18,12 @@ export default function HomeScreen({ navigation }) {
                 setFeatured(featuredItems.data);
                 const categoriesAll = await categoryApi.getAll();
                 setCategories(categoriesAll.data);
+                const counts = {}
+                for (const element of categoriesAll.data) {
+                    const result = await itemApi.getByCategory(element.id);
+                    counts[element.id] = result.data.length;
+                }
+                setCatNameCount(counts);
             } catch (error) {
                 alert('Cannot Load Data')
             }
@@ -59,8 +66,8 @@ export default function HomeScreen({ navigation }) {
             </View>
             <View style={[styles.section,{gap: 10}]}>
                 <Text style={styles.sectionTitle}>Categories</Text>
-                {categories.map(category =>
-                    <CategoryCard key={category.id} category={category} counts={getItemsByCategory(category.id, menuItems).length} onPress={categoriesDetailsHandler} />
+                {categories.map(category => 
+                    <CategoryCard key={category.id} category={category} counts={catNameCount[category.id]} onPress={categoriesDetailsHandler} />
                 )}
             </View>
         </ScrollView>

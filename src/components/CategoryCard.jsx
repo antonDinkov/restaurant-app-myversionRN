@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { itemApi } from "../api";
 
 export default function CategoryCard(props) {
     return (
