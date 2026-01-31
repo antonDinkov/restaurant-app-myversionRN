@@ -7,3 +7,7 @@ export async function getFeatured() {
 export async function getByCategory(catID) {
     return api.get(`/meals?categoryId=${catID}`);
 }
+
+export async function getAll() {
+    return api.get('/meals');
+}

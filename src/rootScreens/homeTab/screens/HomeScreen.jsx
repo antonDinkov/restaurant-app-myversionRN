@@ -9,7 +9,8 @@ import { categoryApi, itemApi } from "../../../api";
 export default function HomeScreen({ navigation }) {
     const [featured, setFeatured] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [catNameCount, setCatNameCount] = useState({})
+    const [catNameCount, setCatNameCount] = useState({});
+    const [meals, setMeals] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
@@ -24,6 +25,8 @@ export default function HomeScreen({ navigation }) {
                     counts[element.id] = result.data.length;
                 }
                 setCatNameCount(counts);
+                const allMeals = await itemApi.getAll();
+                setMeals(allMeals.data);
             } catch (error) {
                 alert('Cannot Load Data')
             }
@@ -37,7 +40,7 @@ export default function HomeScreen({ navigation }) {
     }
 
     const categoriesDetailsHandler = (catId) => {
-        const items = getItemsByCategory(catId, menuItems);
+        const items = getItemsByCategory(catId, meals);
         navigation.navigate('Category', {items, itemDetailsHandler})
     }
 
