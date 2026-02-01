@@ -7,13 +7,13 @@ import { useCartContext } from "../../../context/cart/CartContext";
 export default function DetailsScreen({ route, navigation }) {
     const [quontity, setQuontity] = useState(1);
     const { addToCart } = useCartContext();
+    const { item } = route.params;
 
     const addToCartHandler = () => {
         addToCart(item, quontity);
-        return alert(`${quontity} ${item.name} added to your cart`)
+        alert(`${quontity} ${item.name} added to your cart`)
     }
 
-    const { item } = route.params;
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -34,7 +34,7 @@ export default function DetailsScreen({ route, navigation }) {
 
                     <View style={styles.qtySection}>
                         <Text style={styles.qtyLabel}>Quantity</Text>
-                        <QuantityStepper qty={quontity} onIncrement={() => setQuontity(quontity + 1)} onDecrement={() => setQuontity(quontity - 1)} />
+                        <QuantityStepper qty={quontity} onIncrement={() => setQuontity((quontity) => quontity + 1)} onDecrement={() => setQuontity((quontity) => Math.max(1, quontity - 1))} />
                     </View>
                 </View>
 
