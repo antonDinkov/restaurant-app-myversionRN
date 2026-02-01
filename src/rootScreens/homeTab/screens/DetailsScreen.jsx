@@ -2,10 +2,16 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import Button from "../../../components/Button";
 import QuantityStepper from "../../../components/QuantityStepper";
 import { useState } from "react";
+import { useCartContext } from "../../../context/cart/CartContext";
 
 export default function DetailsScreen({ route, navigation }) {
-    const [quontity, setQuontity] = useState(1)
+    const [quontity, setQuontity] = useState(1);
+    const { addToCart } = useCartContext();
 
+    const addToCartHandler = () => {
+        addToCart(item, quontity);
+        return alert(`${quontity} ${item.name} added to your cart`)
+    }
 
     const { item } = route.params;
     return (
@@ -41,6 +47,7 @@ export default function DetailsScreen({ route, navigation }) {
                         <Button
                             title="Add to Cart"
                             style={styles.addButton}
+                            onPress={() => addToCartHandler()}
                         // todo add onPress handler
                         />
                         <Button
