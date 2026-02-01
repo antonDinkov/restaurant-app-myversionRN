@@ -35,7 +35,7 @@ export default function CartScreen({navigation, route}) {
                 <Button
                     style={styles.checkoutButton}
                     disabled={itemsState.length === 0}
-                    onPress={() => navigation.navigate(route.name === 'CartModal' ? 'CheckoutModal' : 'Checkout')}
+                    onPress={() => navigation.navigate('CheckoutModal')}
                     title="Proceed to Checkout"
                 />
             </View>
