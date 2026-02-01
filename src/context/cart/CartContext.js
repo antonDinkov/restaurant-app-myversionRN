@@ -11,10 +11,10 @@ export const CartContext = createContext({
     clearCart() {},
 });
 
-export function useCartContext(CartContext) {
+export function useCartContext() {
     const context = useContext(CartContext);
 
-    if (!context) {
+    if (context === undefined) {
         throw new Error("useCartContext must be used within a CartProvider");
     }
     return context;
