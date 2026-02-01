@@ -25,11 +25,15 @@ export default function CartPtovider({children}) {
     };
 
     const increaseQuantity = (index) => {
-
+        setItemsState((oldstate) => {
+            return oldstate.map((item, i) => i === index ? {...item, quantity: item.quantity + 1} : item);
+        });
     };
 
     const decreaseQuantity = (index) => {
-
+        setItemsState((oldstate) => {
+            return oldstate.map((item, i) => i === index && item.quantity > 1 ? {...item, quantity: item.quantity - 1} : item);
+        });
     };
 
     const removeItem = (index) => {
