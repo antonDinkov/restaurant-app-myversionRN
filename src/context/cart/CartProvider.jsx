@@ -37,11 +37,13 @@ export default function CartPtovider({children}) {
     };
 
     const removeItem = (index) => {
-
+        setItemsState((oldState) => {
+            return oldState.filter((_, i) => i !== index); // _ показва че итъм не се използва
+        });
     };
 
     const clearCart = () => {
-
+        setItemsState([]);
     };
 
     const data = {
