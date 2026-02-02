@@ -39,7 +39,7 @@ export default function HomeScreen({ navigation }) {
         fetchData();
     }, []);
 
-    const refreshHandler = () => fetchData();
+    const refreshHandler = async () => await fetchData();
 
     const itemDetailsHandler = (itemId) => {
         const item = getItemById(itemId, menuItems)
