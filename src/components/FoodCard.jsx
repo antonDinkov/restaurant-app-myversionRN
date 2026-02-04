@@ -8,6 +8,7 @@ export default function FoodCard(props) {
                 <Image source={{ uri: props.item.imageUrl }} resizeMode="cover" style={styles.picture} />
                 <Text style={[styles.text, {marginVertical: 5}]}>{props.item.name}</Text>
                 <Text style={[styles.text, {color: "#437afb", fontWeight: 'bold'}]}>{props.item.price}</Text>
+                <Text>PlaceHolder for share button</Text>
             </View>
         </TouchableOpacity>
     )

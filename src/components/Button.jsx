@@ -4,7 +4,7 @@ export default function Button({
     title,
     onPress,
     variant = 'primary',
-    disabled = false,
+    disabled,
     style,
 }) {
     return (

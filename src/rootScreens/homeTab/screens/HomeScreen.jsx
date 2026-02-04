@@ -76,8 +76,10 @@ export default function HomeScreen({ navigation }) {
             </View>
             <View style={[styles.section, { gap: 10 }]}>
                 <Text style={styles.sectionTitle}>Categories</Text>
-                {categories.map(category =>
-                    <CategoryCard key={category.id} category={category} counts={catNameCount[category.id]} onPress={categoriesDetailsHandler} />
+                {categories.map(category => {
+                    const pictureUrl = meals.find((meal) => meal.categoryId === category.id)?.imageUrl;
+                    return <CategoryCard key={category.id} category={category} picUrl={pictureUrl} counts={catNameCount[category.id]} onPress={categoriesDetailsHandler} />;
+                }
                 )}
             </View>
         </ScrollView>
