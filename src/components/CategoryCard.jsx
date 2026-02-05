@@ -16,8 +16,7 @@ export default function CategoryCard(props) {
             };
 
             await Share.share({
-                message: `Checkout how thoose ${props.category.title} look like! ${props.picUrl}`,
-                title: props.category.title,
+                message: props.picUrl,
             })
         } catch (err) {
             console.log('Error sharing:', err.message);
