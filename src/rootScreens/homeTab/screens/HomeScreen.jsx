@@ -43,8 +43,12 @@ export default function HomeScreen({ navigation }) {
 
     const refreshHandler = async () => await fetchData();
 
-    const itemDetailsHandler = (itemId) => {
-        const item = getItemById(itemId, menuItems)
+    const itemDetailsHandler = async (itemId) => {
+        console.log(itemId);
+        
+        const result = await itemApi.getItemById(itemId);
+        const item = result.data;
+        console.log(item);
         navigation.navigate('Details', { item, setPictureUpdated })
     }
 
