@@ -31,6 +31,10 @@ export default function DetailsScreen({ route, navigation }) {
                     <View style={styles.divider} />
 
                     {/* Extra selector */}
+                    <View style={styles.imageBtns}>
+                        <Button title={'Pick your pic'} style={{backgroundColor: 'green'}} />
+                        <Button title={'Take your pic'} style={{backgroundColor: 'turquoise'}} />
+                    </View>
 
                     <View style={styles.qtySection}>
                         <Text style={styles.qtyLabel}>Quantity</Text>
@@ -148,4 +152,9 @@ const styles = StyleSheet.create({
     viewCartButton: {
         flex: 1,
     },
+    imageBtns: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        paddingBottom: 10,
+    }
 });

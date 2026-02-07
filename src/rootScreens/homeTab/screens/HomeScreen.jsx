@@ -5,6 +5,7 @@ import { getItemById, getItemsByCategory } from "../../../utils/itemFilterFns";
 import CategoryCard from "../../../components/CategoryCard";
 import { useEffect, useState } from "react";
 import { categoryApi, itemApi } from "../../../api";
+import Location from "../../../components/Location";
 
 export default function HomeScreen({ navigation }) {
     const [featured, setFeatured] = useState([]);
@@ -81,6 +82,10 @@ export default function HomeScreen({ navigation }) {
                     return <CategoryCard key={category.id} category={category} picUrl={pictureUrl} counts={catNameCount[category.id]} onPress={categoriesDetailsHandler} />;
                 }
                 )}
+            </View>
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Where am I ?!?</Text>
+                <Location />
             </View>
         </ScrollView>
 
