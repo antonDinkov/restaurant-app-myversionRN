@@ -42,8 +42,33 @@ export default function DetailsScreen({ route, navigation }) {
         }
     };
 
-    const takeHandler = () => {
+    const takeHandler = async () => {
         console.log('Placeholder for taking a picture functionality');
+        try {
+            setLoading(true)
+            const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+            if (!permissionResult.granted) {
+                Alert.alert('Permission required', 'Permission to access the camera is required.');
+                return;
+            };
+            const result = await ImagePicker.launchCameraAsync({
+                mediaTypes: ['images'],
+                aspect: [4, 3],
+                quality: 1,
+            });
+            console.log(result);
+            if (!result.canceled) {
+                const uri = result.assets[0].uri
+                console.log(uri);
+                setImage(uri);
+                setPictureUpdated(true);
+                await itemApi.updateItem(item.id, { imageUrl: uri });
+            }
+        } catch (err) {
+            alert('Could not take a picture!');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const addToCartHandler = () => {
