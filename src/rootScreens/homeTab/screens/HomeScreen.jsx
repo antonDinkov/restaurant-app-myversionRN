@@ -39,6 +39,12 @@ export default function HomeScreen({ navigation }) {
 
     useEffect(() => {
         fetchData();
+    }, []);
+
+    useEffect(() => {
+        if (pictureUpdated) {
+            fetchData().then(() => setPictureUpdated(false));
+        }
     }, [pictureUpdated]);
 
     const refreshHandler = async () => await fetchData();
