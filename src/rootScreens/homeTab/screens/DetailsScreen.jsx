@@ -1,24 +1,61 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import Button from "../../../components/Button";
 import QuantityStepper from "../../../components/QuantityStepper";
 import { useState } from "react";
 import { useCartContext } from "../../../context/cart/CartContext";
+import * as ImagePicker from "expo-image-picker";
+import { itemApi } from "../../../api";
 
 export default function DetailsScreen({ route, navigation }) {
     const [quontity, setQuontity] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [image, setImage] = useState(null);
     const { addToCart } = useCartContext();
-    const { item } = route.params;
+    const { item, setPictureUpdated } = route.params;
+
+    const pickHandler = async () => {
+        console.log('Placeholder for picking a picture functionality');
+        try {
+            setLoading(true)
+            const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (!permissionResult.granted) {
+                Alert.alert('Permission required', 'Permission to access the media library is required.');
+                return;
+            };
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ['images'],
+                aspect: [4, 3],
+                quality: 1,
+            });
+            console.log(result);
+            if (!result.canceled) {
+                const uri = result.assets[0].uri
+                console.log(uri);
+                setImage(uri);
+                setPictureUpdated(true);
+                await itemApi.updateItem(item.id, { imageUrl: uri });
+            }
+        } catch (err) {
+            alert('Could not pick a picture!');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const takeHandler = () => {
+        console.log('Placeholder for taking a picture functionality');
+    };
 
     const addToCartHandler = () => {
         addToCart(item, quontity);
         alert(`${quontity} ${item.name} added to your cart`)
-    }
+    };
 
     return (
         <View style={styles.container}>
             <ScrollView>
                 <Image
-                    source={{ uri: item.imageUrl }}
+                    source={{ uri: image ?? item.imageUrl }}
                     style={styles.image}
                     resizeMode="cover"
                 />
@@ -32,8 +69,8 @@ export default function DetailsScreen({ route, navigation }) {
 
                     {/* Extra selector */}
                     <View style={styles.imageBtns}>
-                        <Button title={'Pick your pic'} style={{backgroundColor: 'green'}} />
-                        <Button title={'Take your pic'} style={{backgroundColor: 'turquoise'}} />
+                        <Button title={'Pick your pic'} style={{ backgroundColor: 'green' }} onPress={pickHandler} />
+                        <Button title={'Take your pic'} style={{ backgroundColor: 'turquoise' }} onPress={takeHandler} />
                     </View>
 
                     <View style={styles.qtySection}>
@@ -45,7 +82,7 @@ export default function DetailsScreen({ route, navigation }) {
                 <View style={styles.footer}>
                     <View style={styles.priceContainer}>
                         <Text style={styles.totalLabel}>Total:</Text>
-                        <Text style={styles.totalPrice}>${((Number(item.price)*quontity).toFixed(2))}</Text>
+                        <Text style={styles.totalPrice}>${((Number(item.price) * quontity).toFixed(2))}</Text>
                     </View>
                     <View style={styles.footerButtons}>
                         <Button

@@ -11,3 +11,7 @@ export async function getByCategory(catID) {
 export async function getAll() {
     return api.get('/meals');
 }
+
+export async function updateItem(itemId, updatedFields) {
+    return api.patch(`/meals/${itemId}`, updatedFields);
+}

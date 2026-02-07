@@ -42,7 +42,7 @@
       "description": "Classic burger topped with melted cheddar cheese.",
       "price": 9.99,
       "featured": true,
-      "imageUrl": "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400"
+      "imageUrl": "file:///data/user/0/host.exp.exponent/cache/ImagePicker/88a7e246-10f1-4cd5-8a36-d9b475bc4e71.jpeg"
     },
     {
       "id": "item-3",
@@ -67,7 +67,7 @@
       "description": "Fresh tomato sauce, mozzarella, and basil on a thin crust.",
       "price": 11.99,
       "featured": true,
-      "imageUrl": "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=400"
+      "imageUrl": "file:///data/user/0/host.exp.exponent/cache/ImagePicker/cffa9aa9-2c99-4e0d-a1f9-2039d295abd2.jpeg"
     },
     {
       "id": "item-6",

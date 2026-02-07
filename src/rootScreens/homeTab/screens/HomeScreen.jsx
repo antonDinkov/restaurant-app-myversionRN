@@ -13,6 +13,7 @@ export default function HomeScreen({ navigation }) {
     const [catNameCount, setCatNameCount] = useState({});
     const [meals, setMeals] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
+    const [pictureUpdated, setPictureUpdated] = useState(false);
 
     async function fetchData() {
         setRefreshing(true);
@@ -38,13 +39,13 @@ export default function HomeScreen({ navigation }) {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [pictureUpdated]);
 
     const refreshHandler = async () => await fetchData();
 
     const itemDetailsHandler = (itemId) => {
         const item = getItemById(itemId, menuItems)
-        navigation.navigate('Details', { item })
+        navigation.navigate('Details', { item, setPictureUpdated })
     }
 
     const categoriesDetailsHandler = (catId) => {
@@ -69,7 +70,6 @@ export default function HomeScreen({ navigation }) {
                     {
 
                         featured.map(item =>
-
                             <FoodCard key={item.id} item={item} onPress={itemDetailsHandler} />
                         )
                     }

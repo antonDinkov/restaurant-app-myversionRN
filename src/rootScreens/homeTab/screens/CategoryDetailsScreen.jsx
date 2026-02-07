@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView } from "react-native";
 import FoodCard from "../../../components/FoodCard";
 
 export default function CategoryDetailsScreen({route, navigation}) {
